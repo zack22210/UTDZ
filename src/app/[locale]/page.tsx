@@ -6,18 +6,20 @@ import { routing, type Locale } from "@/i18n/routing";
 import en from "@/locales/en.json";
 import HomePageClient from "./HomePageClient";
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://vvultimatum.sbs";
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://universal-tower-defensez.wiki";
 
 type Messages = typeof en;
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
   const messages = (await getMessages({ locale })) as Messages;
+  const image = `${siteUrl}/images/hero.webp`;
   return {
     title: messages.home.meta.title,
     description: messages.home.meta.description,
     alternates: { canonical: locale === "en" ? "/" : `/${locale}`, languages: { en: "/" } },
-    openGraph: { title: messages.home.meta.title, description: messages.home.meta.description, url: siteUrl, images: [`${siteUrl}/images/hero.webp`] },
+    openGraph: { title: messages.home.meta.title, description: messages.home.meta.description, url: siteUrl, siteName: "Universal Tower Defense Z Wiki", images: [{ url: image }] },
+    twitter: { card: "summary_large_image", title: messages.home.meta.title, description: messages.home.meta.description, images: [image] },
   };
 }
 
@@ -26,7 +28,7 @@ export default async function LocaleHomePage({ params }: { params: Promise<{ loc
   const loc = locale as Locale;
   const messages = (await getMessages({ locale })) as Messages;
   const navGroups = getDynamicNavigation(loc);
-  const webSite = { "@context": "https://schema.org", "@type": "WebSite", name: "VV Ultimatum Wiki", url: siteUrl, description: messages.home.meta.description };
+  const webSite = { "@context": "https://schema.org", "@type": "WebSite", name: "Universal Tower Defense Z Wiki", url: siteUrl, description: messages.home.meta.description };
 
   // 动态加载所有 content 目录下的文章
   const allArticles: ContentItem[] = [];

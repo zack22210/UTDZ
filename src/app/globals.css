@@ -10,7 +10,7 @@
     --card-foreground: 0 0% 12%;
     --popover: 0 0% 100%;
     --popover-foreground: 0 0% 12%;
-    --primary: 18 65% 42%;
+    --primary: 258 65% 52%;
     --primary-foreground: 0 0% 100%;
     --secondary: 0 0% 95%;
     --secondary-foreground: 0 0% 20%;
@@ -22,39 +22,43 @@
     --destructive-foreground: 0 0% 100%;
     --border: 0 0% 88%;
     --input: 0 0% 88%;
-    --ring: 18 65% 42%;
+    --ring: 258 65% 52%;
     --radius: 0.75rem;
-    --nav-theme: 18 65% 42%;
-    --nav-theme-light: 18 65% 55%;
-    --chart-1: 18 65% 42%;
-    --chart-2: 175 32% 42%;
-    --chart-3: 221 30% 42%;
-    --chart-4: 38 62% 42%;
+    --nav-theme: 258 65% 52%;
+    --nav-theme-light: 258 65% 62%;
+    --accent-summer: 32 95% 55%;
+    --accent-spider: 0 75% 55%;
+    --chart-1: 258 65% 52%;
+    --chart-2: 32 95% 55%;
+    --chart-3: 0 75% 55%;
+    --chart-4: 221 30% 42%;
     --chart-5: 0 0% 45%;
   }
 
   .dark {
-    --background: 0 0% 5%;
-    --foreground: 0 0% 88%;
-    --card: 0 0% 7%;
-    --card-foreground: 0 0% 88%;
-    --popover: 0 0% 7%;
-    --popover-foreground: 0 0% 88%;
-    --primary: 0 0% 92%;
-    --primary-foreground: 0 0% 8%;
-    --secondary: 0 0% 12%;
-    --secondary-foreground: 0 0% 88%;
-    --muted: 0 0% 12%;
-    --muted-foreground: 0 0% 56%;
-    --accent: 0 0% 15%;
+    --background: 258 28% 6%;
+    --foreground: 0 0% 90%;
+    --card: 258 24% 8%;
+    --card-foreground: 0 0% 90%;
+    --popover: 258 24% 8%;
+    --popover-foreground: 0 0% 90%;
+    --primary: 258 70% 68%;
+    --primary-foreground: 258 40% 10%;
+    --secondary: 258 18% 14%;
+    --secondary-foreground: 0 0% 90%;
+    --muted: 258 16% 14%;
+    --muted-foreground: 258 10% 62%;
+    --accent: 258 18% 16%;
     --accent-foreground: 0 0% 92%;
     --destructive: 8 70% 45%;
     --destructive-foreground: 0 0% 96%;
-    --border: 0 0% 18%;
-    --input: 0 0% 18%;
-    --ring: 18 65% 45%;
-    --nav-theme: 18 65% 40%;
-    --nav-theme-light: 18 65% 55%;
+    --border: 258 16% 18%;
+    --input: 258 16% 18%;
+    --ring: 258 70% 58%;
+    --nav-theme: 258 70% 58%;
+    --nav-theme-light: 258 70% 68%;
+    --accent-summer: 32 95% 55%;
+    --accent-spider: 0 75% 55%;
   }
 }
 
@@ -68,8 +72,8 @@
     inset: 0;
     pointer-events: none;
     background:
-      radial-gradient(circle at 18% 12%, hsl(var(--nav-theme) / 0.12), transparent 32rem),
-      radial-gradient(circle at 85% 8%, hsl(175 32% 47% / 0.08), transparent 28rem);
+      radial-gradient(circle at 18% 12%, hsl(var(--nav-theme) / 0.16), transparent 32rem),
+      radial-gradient(circle at 85% 8%, hsl(var(--accent-summer) / 0.08), transparent 28rem);
     z-index: -1;
   }
 }
