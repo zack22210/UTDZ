@@ -1,7 +1,23 @@
 const NAV_SLUG_PREFIX = "universal-tower-defense-z-";
 
+const ACRONYM_LABELS: Record<string, string> = {
+  dbz: "DBZ",
+  utdz: "UTDZ",
+  utdx: "UTDX",
+};
+
+function formatWord(word: string): string {
+  const lower = word.toLowerCase();
+  if (ACRONYM_LABELS[lower]) return ACRONYM_LABELS[lower];
+  return lower.charAt(0).toUpperCase() + lower.slice(1);
+}
+
 function titleCase(value: string): string {
-  return value.replace(/-/g, " ").replace(/\b\w/g, (char) => char.toUpperCase());
+  return value
+    .split("-")
+    .filter(Boolean)
+    .map(formatWord)
+    .join(" ");
 }
 
 export function slugToNavLabel(slug: string): string {

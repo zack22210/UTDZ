@@ -352,11 +352,15 @@ export function getDynamicNavigation(language: Locale = "en"): NavGroup[] {
     const localTitles = GROUP_TITLES_BY_LOCALE[language] || {};
     const groupTitle = localTitles[groupSlug] || GROUP_TITLES[groupSlug] || groupSlug.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
 
+    const overview = links[0];
+    const articles = links.slice(1).sort((a, b) => a.label.localeCompare(b.label));
+    const sortedLinks = overview ? [overview, ...articles] : articles;
+
     groups.push({
       title: groupTitle,
-      count: links.length - 1, // 减去 Overview
+      count: sortedLinks.length - (overview ? 1 : 0),
       slug: groupSlug,
-      links,
+      links: sortedLinks,
     });
   }
 
