@@ -29,7 +29,7 @@ export default function HomePageClient({ home, locale, articles, recentArticles 
         </div>
 
         {/* Official media — immediately under hero title */}
-        <div className="mx-auto mt-6 w-full max-w-6xl" aria-label={home.hero.videoLabel}>
+        <div className="mx-auto mt-6 w-full max-w-2xl" aria-label={home.hero.videoLabel}>
           <TrailerEmbed videoId={YOUTUBE_VIDEO_ID} />
         </div>
 
