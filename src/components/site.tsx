@@ -80,9 +80,10 @@ export async function WikiSidebar({ locale, navGroups, currentPath }: { locale: 
                   <li key={link.href}>
                     <Link
                       href={localizeHref(link.href, locale)}
-                      className={`flex items-center gap-2 rounded-lg px-2 py-1.5 text-sm transition-colors ${isActive(link.href) ? "bg-[hsl(var(--nav-theme)/0.15)] font-semibold text-[hsl(var(--nav-theme))]" : "text-muted-foreground hover:bg-muted hover:text-foreground"}`}
+                      title={link.fullTitle}
+                      className={`flex items-start gap-2 rounded-lg px-2 py-1.5 text-sm transition-colors ${isActive(link.href) ? "bg-[hsl(var(--nav-theme)/0.15)] font-semibold text-[hsl(var(--nav-theme))]" : "text-muted-foreground hover:bg-muted hover:text-foreground"}`}
                     >
-                      <span className="truncate">{link.label}</span>
+                      <span className="line-clamp-2 min-w-0 flex-1 leading-snug">{link.label}</span>
                       {link.badge && <Badge variant="secondary" className="ml-auto h-5 border-border px-1.5 text-[10px]">{link.badge}</Badge>}
                     </Link>
                   </li>

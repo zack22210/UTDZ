@@ -1,6 +1,7 @@
 import fs from "fs";
 import path from "path";
 import { CONTENT_TYPES as CONFIG_CONTENT_TYPES } from "@/config/navigation";
+import { getNavLabel } from "@/lib/nav-label";
 import { routing, type Locale } from "@/i18n/routing";
 
 // 从统一配置导入内容类型
@@ -52,6 +53,7 @@ export interface ContentMetadata {
   image?: string;
   badge?: string;
   summary?: string;
+  navTitle?: string;
 }
 
 // Heading 结构（从 MDX 源文件提取）
@@ -232,7 +234,7 @@ export interface NavGroup {
   /** 分组 slug（即目录名，如 "bosses"） */
   slug: string;
   /** 文章链接列表 */
-  links: Array<{ label: string; href: string; badge?: string }>;
+  links: Array<{ label: string; fullTitle: string; href: string; badge?: string }>;
 }
 
 // 分组标题映射：slug → 人类可读标题（默认英文）
@@ -310,7 +312,7 @@ export function getDynamicNavigation(language: Locale = "en"): NavGroup[] {
     const links: NavGroup["links"] = [];
     // 添加 Overview 入口（按 locale 翻译）
     const overviewLabel = OVERVIEW_LABEL_BY_LOCALE[language] || "Overview";
-    links.push({ label: overviewLabel, href: `/${groupSlug}` });
+    links.push({ label: overviewLabel, fullTitle: overviewLabel, href: `/${groupSlug}` });
 
     for (const segments of slugPaths) {
       const articleSlug = segments.join("/");
@@ -319,6 +321,7 @@ export function getDynamicNavigation(language: Locale = "en"): NavGroup[] {
 
       const fullPath = path.join(groupDir, `${mdxFilePath}.mdx`);
       let title = segments[segments.length - 1].replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
+      let navTitle: string | undefined;
       let badge: string | undefined;
 
       try {
@@ -326,6 +329,9 @@ export function getDynamicNavigation(language: Locale = "en"): NavGroup[] {
         // 提取 metadata.title
         const titleMatch = source.match(/title:\s*["'](.+?)["']/);
         if (titleMatch) title = titleMatch[1];
+        // 提取 metadata.navTitle（导航短标题，可选）
+        const navTitleMatch = source.match(/navTitle:\s*["'](.+?)["']/);
+        if (navTitleMatch) navTitle = navTitleMatch[1];
         // 提取 metadata.badge
         const badgeMatch = source.match(/badge:\s*["'](.+?)["']/);
         if (badgeMatch) badge = badgeMatch[1];
@@ -333,7 +339,13 @@ export function getDynamicNavigation(language: Locale = "en"): NavGroup[] {
         // 读取失败用默认标题
       }
 
-      links.push({ label: title, href: `/${groupSlug}/${articleSlug}`, badge });
+      const href = `/${groupSlug}/${articleSlug}`;
+      links.push({
+        label: getNavLabel({ title, navTitle, slug: articleSlug }),
+        fullTitle: title,
+        href,
+        badge,
+      });
     }
 
     // 优先使用 locale 特定标题，否则回退到英文默认
