@@ -6,7 +6,7 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { TrailerButton, localizeHref } from "@/components/site";
+import { TrailerEmbed, localizeHref } from "@/components/site";
 import type { ContentItem } from "@/lib/content";
 import en from "@/locales/en.json";
 
@@ -30,7 +30,7 @@ export default function HomePageClient({ home, locale, articles, recentArticles 
 
         {/* Official media — immediately under hero title */}
         <div className="mx-auto mt-6 w-full max-w-6xl" aria-label={home.hero.videoLabel}>
-          <TrailerButton videoId={YOUTUBE_VIDEO_ID} />
+          <TrailerEmbed videoId={YOUTUBE_VIDEO_ID} />
         </div>
 
         <p className="mx-auto mt-6 max-w-3xl text-base leading-relaxed text-muted-foreground">{home.hero.description}</p>
